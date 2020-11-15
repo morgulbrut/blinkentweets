@@ -14,6 +14,9 @@ hashtags = [
     "#klimastreik",
     "#cambioclimatico",
     "#crisisclimatica",
+    "#changementclimatique",
+    "#climatejustice",
+    "#greenpeace",
 
     "#ecoterrorism",
     "#covid19",
