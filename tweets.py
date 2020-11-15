@@ -60,5 +60,10 @@ if __name__ == "__main__":
         client.put_pixels(pixels)
     # initialize stream
     streamListener = StreamListener()
-    stream = tweepy.Stream(auth=api.auth, listener=streamListener,tweet_mode='extended')
-    stream.filter(track=hashtags.hashtags)
+    while true:
+        try:
+            stream = tweepy.Stream(auth=api.auth, listener=streamListener,tweet_mode='extended')
+            stream.filter(track=hashtags.hashtags)
+        except:
+            print("stream error")
+            time.sleep(30)
