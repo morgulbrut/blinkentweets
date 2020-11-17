@@ -42,7 +42,7 @@ class StreamListener(tweepy.StreamListener):
                 try:
                     i = hashtags.hashtags.index(h)
                     counts[i] = 255 
-s                    for j in range(numLEDs):
+                    for j in range(numLEDs):
                         counts[j] -= 6
                         pixels[j] = (0,counts[j],0)
                         client.put_pixels(pixels)
