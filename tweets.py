@@ -42,7 +42,7 @@ class StreamListener(tweepy.StreamListener):
                 try:
                     i = hashtags.hashtags.index(h)
                     counts[i] = 255 
-                    for j in range(numLEDs):
+s                    for j in range(numLEDs):
                         counts[j] -= 6
                         pixels[j] = (0,counts[j],0)
                         client.put_pixels(pixels)
@@ -70,12 +70,19 @@ if __name__ == "__main__":
         client.put_pixels(pixels)
     # initialize stream
     streamListener = StreamListener()
-    while True:
-        try:
-            stream = tweepy.Stream(auth=api.auth, listener=streamListener,tweet_mode='extended')
-            stream.filter(track=hashtags.hashtags)
-        except KeyboardInterrupt:
-            exit(0)
-        except:
-            print("stream error")
-            time.sleep(30)
+
+    # while True:
+    #     try:
+    #         stream = tweepy.Stream(auth=api.auth, listener=streamListener,tweet_mode='extended')
+    #         stream.filter(track=hashtags.hashtags)
+    #     except UserAbort:
+    #         break
+    #     except KeyboardInterrupt:
+    #         sys.exit()
+    #         pass
+    #     except Exception as e:
+    #         print(e)
+    #         time.sleep
+
+    stream = tweepy.Stream(auth=api.auth, listener=streamListener,tweet_mode='extended')
+    stream.filter(track=hashtags.hashtags)
