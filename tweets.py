@@ -71,18 +71,10 @@ if __name__ == "__main__":
     # initialize stream
     streamListener = StreamListener()
 
-    # while True:
-    #     try:
-    #         stream = tweepy.Stream(auth=api.auth, listener=streamListener,tweet_mode='extended')
-    #         stream.filter(track=hashtags.hashtags)
-    #     except UserAbort:
-    #         break
-    #     except KeyboardInterrupt:
-    #         sys.exit()
-    #         pass
-    #     except Exception as e:
-    #         print(e)
-    #         time.sleep
-
-    stream = tweepy.Stream(auth=api.auth, listener=streamListener,tweet_mode='extended')
-    stream.filter(track=hashtags.hashtags)
+    while True:
+        try:
+            stream = tweepy.Stream(auth=api.auth, listener=streamListener,tweet_mode='extended')
+            stream.filter(track=hashtags.hashtags)
+        except Exception as e:
+            print(e)
+            time.sleep
