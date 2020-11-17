@@ -13,7 +13,6 @@ pixels = [ (0,0,0) ] * numLEDs
 
 client = opc.Client(settings.address)
 
-
 # StreamListener class inherits from tweepy.StreamListener and overrides on_status/on_error methods.
 class StreamListener(tweepy.StreamListener):
     def on_status(self, tweet):
@@ -29,16 +28,27 @@ class StreamListener(tweepy.StreamListener):
         ht = ['#'+t['text'].lower() for t in tweet.entities['hashtags']]
         
         for h in ht:
-            try:
-                i = hashtags.hashtags.index(h)
-                counts[i] += 1
-
-                for i in range(numLEDs):
-                    pixels[i] = (0, (counts[i]*5)%255, 0)
-                    client.put_pixels(pixels)
-                print(ht)
-            except:
-                pass
+            if hashtags.mode == 'normal':
+                try:
+                    i = hashtags.hashtags.index(h)
+                    counts[i] +=1 
+                    for j in range(numLEDs):
+                        pixels[j] = (0, (counts[j]*5)%255, 0)
+                        client.put_pixels(pixels)
+                    print(ht)
+                except:
+                    pass
+            elif hashtags.mode == 'fading':
+                try:
+                    i = hashtags.hashtags.index(h)
+                    counts[i] = 255 
+                    for j in range(numLEDs):
+                        counts[j] -= 6
+                        pixels[j] = (0,counts[j],0)
+                        client.put_pixels(pixels)
+                    print(ht)
+                except:
+                    pass
 
 
     def on_error(self, status_code):
@@ -60,10 +70,12 @@ if __name__ == "__main__":
         client.put_pixels(pixels)
     # initialize stream
     streamListener = StreamListener()
-    while true:
+    while True:
         try:
             stream = tweepy.Stream(auth=api.auth, listener=streamListener,tweet_mode='extended')
             stream.filter(track=hashtags.hashtags)
+        except KeyboardInterrupt:
+            exit(0)
         except:
             print("stream error")
             time.sleep(30)
