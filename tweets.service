@@ -1,0 +1,14 @@
+[Unit]
+Description=tweets service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 -u tweets.py
+WorkingDirectory=/home/pi/blinkentweets
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target
