@@ -1,0 +1,10 @@
+[Unit]
+Description=tweets_autoupdate
+
+[Service]
+ExecStart=/home/pi/blinkentweets/start_tweets.sh
+User=pi
+Group=pi
+
+[Install]
+WantedBy=multi-user.target

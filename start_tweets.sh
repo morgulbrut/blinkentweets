@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-cd /home/pi/Documentos/pytwebot
+cd /home/pi/blinkentweets
 STATE=$(ping -q -w 1 -c 1 `ip r | grep default | cut -d ' ' -f 3` > /dev/null && echo ok || echo error)
 while [  $STATE == "error" ]; do
     #do a ping and check that its not a default message or change to grep for something else
@@ -15,4 +15,4 @@ echo
 echo "Pull done..."
 echo "Initializating tweets.py..."
 
-echo nope | python tweets.py
+echo nope | python3 tweets.py

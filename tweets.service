@@ -5,7 +5,7 @@ Requires=fadecandy.service
 [Service]
 Type=notify
 WorkingDirectory=/home/pi/blinkentweets
-ExecStart=/usr/bin/env python /home/pi/blinkentweets/tweets.py
+ExecStart=/usr/bin/env python3 /home/pi/blinkentweets/tweets.py
 Restart=on-failure
 Environment=PYTHONUNBUFFERED=1
 User=pi
